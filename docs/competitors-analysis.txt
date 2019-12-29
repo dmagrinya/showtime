@@ -46,13 +46,15 @@ Yelp:
 
 CONCLUSIONS:
 
-    The closest apps to the idea I have in mind seem to be abandoned (RockU and Tuntunpa). It could be particularly useful find out why Tuntunpa failed, since one of the cities supported was Barcelona.
+    The closest apps to the idea I have in mind seem to be abandoned (RockU and Tuntunpa). It could be particularly useful find out why Tuntunpa failed, since one of the supported cities was Barcelona.
 
 	Most of the currently active apps are focused on artists rather than venues, and specially on big events/venues (BandsinTown, Dice, Songkick, Xceed). Our real goal is inform the user what are his options on his area today, not if an specific artist is playing close.
     
-    I noticed that adding events for some apps must be really painful, not scalable at all (Dice, Xceed). I linke Bandsintown approach on this regard, it offers a bulky way to intoduce data through an Excel sheet template.
+    I noticed that adding events for some apps must be really painful, not scalable at all (Dice, Xceed). I like Bandsintown approach on this regard, user can add events in bulk through an Excel sheet template.
 
-	An important feature for some currently active apps, like DICE, seems to be selling tickets.
+	An important feature for some currently active apps, like DICE, seems to be selling tickets. Far from what Showtime offers. As long shot, I'd like Showtime to support "Taquilla Inversa" for its events.
+
+    Not sure if it is a good idea inform users of different event types, not only music. The only website that does this is Chooseyourevent. I think initially it is better focus on music shows.
 
 	The app/website Yelp can be useful to find live music bars to whom Showtime can be interesting.
 
