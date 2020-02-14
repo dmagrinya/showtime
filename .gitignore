@@ -1,6 +1,7 @@
 *.bin
 *.lock
 *.iml
+*.pyc
 cache.properties
 local.properties
 
