@@ -1,9 +1,12 @@
 *.bin
 *.lock
 *.iml
+*.pyc
 cache.properties
 local.properties
 
 showtime-client/.idea/
 showtime-client/app/build/
 showtime-client/app/proguard-rules.pro
+
+showtime-server/app/migrations
