@@ -1,4 +1,5 @@
-FROM python:3
+FROM python:3-alpine
+RUN apk update && apk add postgresql-dev gcc build-base
 ENV PYTHONUNBUFFERED 1
 RUN mkdir /code
 WORKDIR /code
