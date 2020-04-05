@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  client:
     docker:
       - image: circleci/android:api-29
 
@@ -17,7 +17,7 @@ jobs:
 
       - run: 
           name: Build 
-          working_directory: ./showtime-client
+          working_directory: showtime-client
           command: ./gradlew androidDependencies
 
       - save_cache:
@@ -27,7 +27,7 @@ jobs:
 
       - run: 
           name: Test
-          working_directory: ./showtime-client
+          working_directory: showtime-client
           command: ./gradlew lint test
 
       - store_artifacts: 
@@ -36,3 +36,69 @@ jobs:
 
       - store_test_results: 
           path: showtime-client/app/build/test-results
+
+  server:
+    docker:
+      # python version not relevant here, but we use a language convenience image to have docker-compose already installed
+      # see: https://circleci.com/docs/2.0/circleci-images/#image-types
+      - image: circleci/python:3.6.4
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - setup_remote_docker
+
+      - run: 
+          name: Build 
+          working_directory: showtime-server
+          command: docker-compose build
+
+      - run: 
+          name: Deploy
+          working_directory: showtime-server
+          command: docker-compose up -d
+
+      - run: 
+          name: Check Django Configuration
+          working_directory: showtime-server
+          command: docker exec showtimeserver_server_1 sh -c "python3 manage.py check"
+
+      - run: 
+          name: DB Migrations
+          working_directory: showtime-server
+          command: docker exec showtimeserver_server_1 sh -c "python3 manage.py makemigrations app && python3 manage.py migrate"
+
+      - run: 
+          name: Unit Test
+          working_directory: showtime-server
+          command: docker exec showtimeserver_server_1 sh -c "python3 manage.py test -v 2" &> server-ut-results.log
+
+      - run: 
+          name: Smoke Test
+          working_directory: showtime-server
+          command: docker run --network container:showtimeserver_server_1 appropriate/curl http://localhost:8000/app/users/ &> server-smoke-results.log
+
+      - deploy:
+          name: Push Docker image
+          command: |
+            TAG=$(git rev-parse --abbrev-ref HEAD)_$(git rev-parse --short HEAD)
+            docker image tag dmagrinya/showtime-server:latest dmagrinya/showtime-server:$TAG
+            docker login -u $DOCKER_ID -p $DOCKER_PASSWORD
+            docker push dmagrinya/showtime-server:$TAG
+
+      - store_artifacts:
+          path: showtime-server/server-ut-results.log
+          destination: server-ut-results.log
+
+      - store_artifacts:
+          path: showtime-server/server-smoke-results.log
+          destination: server-smoke-results.log
+
+workflows:
+   version: 2
+   showtime:
+      jobs:
+         - client
+         - server

@@ -2,12 +2,11 @@ version: '3'
 
 services:
   db:
-    image: postgres
-  web:
+    image: postgres:12.1-alpine
+  server:
     build: .
+    image: dmagrinya/showtime-server
     command: python manage.py runserver 0.0.0.0:8000
-    volumes:
-      - .:/code
     ports:
       - "8000:8000"
     depends_on:
