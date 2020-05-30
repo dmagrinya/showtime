@@ -1,4 +1,5 @@
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 from app.models import Venue, Artist
 from django.contrib.auth.models import User
 from app.serializers import VenueSerializer, ArtistSerializer, UserSerializer
@@ -14,6 +15,7 @@ class VenueViewSet(viewsets.ModelViewSet):
 
     queryset = Venue.objects.all()
     serializer_class = VenueSerializer
+    permission_classes = [IsAuthenticated]
 
 
 
@@ -25,7 +27,7 @@ class ArtistViewSet(viewsets.ModelViewSet):
 
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
-    permission_classes = [IsOwnerOrReadOnly]
+    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -39,3 +41,4 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
 
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
