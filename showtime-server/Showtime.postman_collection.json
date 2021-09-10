@@ -1,0 +1,115 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Showtime",
+		"_postman_id": "7048716a-4cfa-16f1-1736-bbd86fcb2491",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"description": "",
+			"item": [
+				{
+					"name": "Request access token",
+					"request": {
+						"url": "http://localhost:8000/app/o/token/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic QTViYkpYY0lvaWVWTVJLWmxiMkxBMHd2MjBacGFTYnBMYWxCcEtWTzpqQzVLNEFWY1RKdGlkcnBzV3hPcm1hSTFtTGIyalNab3VIbkNYTkFJbXpjbHlsaWpFUUh5aWNleXZFNkVqZjBQTzZmcm85SWxQVDJsUHdlTHNXNERXWmdMamxMVUptU2w1RXl2aDFoY2hmRXN0NjlZUU9DMVpXQVE1VmVKRzNqZw==",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"disabled": false,
+									"description": "",
+									"key": "username",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"disabled": false,
+									"description": "",
+									"key": "password",
+									"value": "showtimepass",
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"description": "",
+			"item": [
+				{
+					"name": "List users",
+					"request": {
+						"url": "http://localhost:8000/app/users/",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 2lFl4wzpGPWTgwdzaYRPBJEL0veJbI",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"disabled": false,
+									"description": "",
+									"key": "username",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"disabled": false,
+									"description": "",
+									"key": "password",
+									"value": "showtimepass",
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
