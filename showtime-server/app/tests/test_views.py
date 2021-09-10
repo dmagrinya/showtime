@@ -27,14 +27,21 @@ class ArtistTest(APITestCase):
     @classmethod
     def setUpTestData(cls):
         encrypted_password = make_password('password')
-        User.objects.create(username='manager', password=encrypted_password)
+        user = User.objects.create(username='manager', password=encrypted_password)
+        import pdb; pdb.set_trace()
         User.objects.create(username='eve', password=encrypted_password)
 
     def test_create_artist_authenticated(self):
         """
         Ensure we can create a new artist object.
         """
-        self.client.login(username='manager', password='password')
+        loggedin = self.client.login(username='manager', password='password')
+
+        """
+        WIP:
+        token = User.objects.get(username='manager').oauth2_provider_accesstoken.create(expires='2020-05-31 23:15', token='fasdfasd748')
+        self.client.credentials(Authorization='Bearer {}'.format(token))
+        """
 
         url = reverse('artist-list')
         data = {'name': 'James Hunter'}
